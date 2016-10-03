@@ -1,0 +1,43 @@
+{
+  "name": "engino-app-server",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:dev": "webpack --progress --colors --no-info",
+    "build:watch": "webpack --watch --progress --colors --no-info",
+    "build:production": "lsc ./buildProduction.ls",
+    "prepublish": "npm run build:dev",
+    "start:watch": "cross-env DEBUG=*,-retry-as-promised,-express*,-engine*,-socket.io*,-db*,-superagent,-nodemon* MONGO_HOSTNAME='localhost' MONGO_PORT='27017' MONGO_DB_NAME='engino-app' nodemon dist/index.dist.js",
+    "start:debug": "cross-env DEBUG=*,-retry-as-promised,-express*,-engine*,-socket.io*,-db*,-superagent,-nodemon* MONGO_HOSTNAME='localhost' MONGO_PORT='27017' MONGO_DB_NAME='engino-app' devtool dist/index.dist.js --watch",
+    "start": "cross-env NO_PRETTY_ERROR=on DEBUG=*,-retry-as-promised,-express*,-engine*,-socket.io*,-db*,-superagent node dist/index.dist.js",
+    "dev": "npm-run-all --parallel build:watch start:watch",
+    "debug": "npm-run-all --parallel build:watch start:debug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Proprietary",
+  "dependencies": {
+    "cookieparser": "^0.1.0",
+    "cross-env": "^1.0.8",
+    "express": "^4.14.0",
+    "mongodb": "^2.1.7",
+    "socket.io": "^1.4.8",
+    "socket.io-client": "^1.4.8",
+    "source-map-support": "^0.4.1",
+    "when": "^3.7.7"
+  },
+  "devDependencies": {
+    "devtool": "^2.0.2",
+    "livescript": "^1.5.0",
+    "livescript-loader": "^0.1.5",
+    "json-loader": "^0.5.4",
+    "nodemon": "^1.9.2",
+    "npm-run-all": "^2.3.0",
+    "raw-loader": "^0.5.1",
+    "react-styling-loader": "0.0.1",
+    "stylus-loader": "^2.0.0",
+    "webpack": "^1.13.1",
+    "webpack-error-notification": "^0.1.6"
+  }
+}
